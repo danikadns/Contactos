@@ -4,6 +4,12 @@
  */
 package agendacontactos;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author GMG
@@ -16,6 +22,11 @@ public class NuevoMensaje extends javax.swing.JFrame {
     public NuevoMensaje() {
         initComponents();
     }
+    
+    Object[] list = new Object[4];
+    Object[] telefono = new Object[100];
+    static Cola colaMensaje = new Cola(30);
+    int x;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,9 +44,12 @@ public class NuevoMensaje extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtMensaje = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnContactos = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtNumero = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,24 +80,28 @@ public class NuevoMensaje extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 70));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 160, -1));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 160, -1));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Destinatario");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, 10));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, -1, 10));
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Descripcion");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, -1, -1));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtMensaje.setColumns(20);
+        txtMensaje.setRows(5);
+        jScrollPane1.setViewportView(txtMensaje);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, 340, 130));
 
         jButton1.setText("Enviar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, 70, 30));
 
         jButton2.setText("Salir");
@@ -93,6 +111,19 @@ public class NuevoMensaje extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 300, 70, 30));
+
+        btnContactos.setText("Cargar Contactos");
+        btnContactos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContactosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnContactos, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 120, -1, -1));
+
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Numero:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        jPanel1.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,6 +146,85 @@ public class NuevoMensaje extends javax.swing.JFrame {
         instancia.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnContactosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContactosActionPerformed
+        ListaEnlazadaSimple listaAmigo = InterfazAgregar.getListaAmigos();
+        ListaEnlazadaSimple listaTrabajo = InterfazAgregar.getListaTrabajo();
+        ListaEnlazadaSimple listaFamilia = InterfazAgregar.getListaFamilia();
+
+        NodoLista prueba;
+
+        DefaultComboBoxModel<String> modelo = new DefaultComboBoxModel<>();
+        modelo.addElement("Desconocido");
+
+        prueba = listaAmigo.primero;
+        while (prueba != null) {
+            telefono[x] = prueba.datoTelefono;
+            modelo.addElement(prueba.datoNombre.toString());
+            prueba = prueba.siguiente;
+            x++;
+        }
+        
+        prueba = listaTrabajo.primero;
+        while (prueba != null) {
+            telefono[x] = prueba.datoTelefono;
+            modelo.addElement(prueba.datoNombre.toString());
+            prueba = prueba.siguiente;
+            x++;
+        }
+        prueba = listaFamilia.primero;
+        while (prueba != null) {
+            telefono[x] = prueba.datoTelefono;
+            modelo.addElement(prueba.datoNombre.toString());
+            prueba = prueba.siguiente;
+            x++;
+        }
+        
+        jComboBox1.setModel(modelo);
+        
+        jComboBox1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                // Obtener el elemento seleccionado del JComboBox
+                int index = jComboBox1.getSelectedIndex();
+
+                // Establecer el texto en el JLabel
+                if(index == 0){
+                    
+                }else{
+                    txtNumero.setText(telefono[index-1].toString());
+                }
+                
+            }
+        });
+    }//GEN-LAST:event_btnContactosActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String seleccion = (String) jComboBox1.getSelectedItem();
+        
+        
+        if (txtMensaje.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese algun mensaje");
+        } else {
+            // El código de validación adicional si es necesario
+        }
+        LocalDateTime fechaActual = LocalDateTime.now();
+        list[0] = seleccion;        
+        list[1] = txtNumero.getText();
+        list[2] = txtMensaje.getText();
+        list[3] = fechaActual;
+        colaMensaje.insertar(list[0], list[1], list[2], list[3]);
+        colaMensaje.frenteCola();
+        
+        System.out.println(list[0]);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public static Cola getColaMensajes(){
+        return colaMensaje;
+    }
+    
+    public static void setColaMensajes(Cola cola){
+        NuevoMensaje.colaMensaje = cola;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -151,15 +261,21 @@ public class NuevoMensaje extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnContactos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea txtMensaje;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
+
+
+    
 }

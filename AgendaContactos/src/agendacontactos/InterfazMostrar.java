@@ -4,6 +4,9 @@
  */
 package agendacontactos;
 
+
+import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +22,10 @@ public class InterfazMostrar extends javax.swing.JFrame {
     public InterfazMostrar() {
         initComponents();
     }
+    Object[][] list = new Object[100][4];
+    
+    
+    static Pila pilaLlamadas = new Pila(100);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -187,9 +194,8 @@ public class InterfazMostrar extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        
-      InterfazAgregar instancia = new InterfazAgregar();
+
+        InterfazAgregar instancia = new InterfazAgregar();
         dispose();
         instancia.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -203,13 +209,34 @@ public class InterfazMostrar extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-         Llamada instancia = new Llamada();
-       
-        instancia.setVisible(true);
-        
+        int index = jTable1.getSelectedRow();
+
+        if (index != -1) {
+            LocalDateTime fechaActual = LocalDateTime.now();
+            pilaLlamadas.push(list[index][1], list[index][0], fechaActual);
+            pilaLlamadas.mostrarElementosPila();
+            
+            Llamada instancia = new Llamada();
+
+            instancia.setVisible(true);
+            instancia.txtNombre.setText(list[index][0].toString());
+            instancia.txtNumero.setText(list[index][1].toString());
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un contacto");
+        }
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public static Pila getPilaLlamada(){
+        return pilaLlamadas;
+    }
+
+    public static void setPilaLlamadas(Pila pilaLlamadas) {
+        InterfazMostrar.pilaLlamadas = pilaLlamadas;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -256,7 +283,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
 
         int count = 0;
         listaAmigo.mostrarDatosLista();
-        Object[] list = new Object[4];
+
         NodoLista prueba;
 
         String seleccion = (String) jComboBox1.getSelectedItem();
@@ -264,68 +291,74 @@ public class InterfazMostrar extends javax.swing.JFrame {
         if (seleccion.equals("Amigos")) {
             prueba = listaAmigo.primero;
             while (prueba != null) {
-                list[0] = prueba.datoNombre;
-                list[1] = prueba.datoTelefono;
-                list[2] = prueba.datoCorreo;
-                list[3] = prueba.datoCategoria;
-                modelo.addRow(list);
+                list[count][0] = prueba.datoNombre;
+                list[count][1] = prueba.datoTelefono;
+                list[count][2] = prueba.datoCorreo;
+                list[count][3] = prueba.datoCategoria;
+                modelo.addRow(list[count]);
                 prueba = prueba.siguiente;
+                count++;
             }
         } else if (seleccion.equals("Familia")) {
 
             prueba = listaFamilia.primero;
             while (prueba != null) {
-                list[0] = prueba.datoNombre;
-                list[1] = prueba.datoTelefono;
-                list[2] = prueba.datoCorreo;
-                list[3] = prueba.datoCategoria;
-                modelo.addRow(list);
+                list[count][0] = prueba.datoNombre;
+                list[count][1] = prueba.datoTelefono;
+                list[count][2] = prueba.datoCorreo;
+                list[count][3] = prueba.datoCategoria;
+                modelo.addRow(list[count]);
                 prueba = prueba.siguiente;
+                count++;
             }
         } else if (seleccion.equals("Trabajo")) {
             prueba = listaTrabajo.primero;
             while (prueba != null) {
-                list[0] = prueba.datoNombre;
-                list[1] = prueba.datoTelefono;
-                list[2] = prueba.datoCorreo;
-                list[3] = prueba.datoCategoria;
-                modelo.addRow(list);
+                list[count][0] = prueba.datoNombre;
+                list[count][1] = prueba.datoTelefono;
+                list[count][2] = prueba.datoCorreo;
+                list[count][3] = prueba.datoCategoria;
+                modelo.addRow(list[count]);
                 prueba = prueba.siguiente;
+                count++;
             }
-        }else if(seleccion.equals("Todos")){
+        } else if (seleccion.equals("Todos")) {
             prueba = listaFamilia.primero;
             while (prueba != null) {
-                list[0] = prueba.datoNombre;
-                list[1] = prueba.datoTelefono;
-                list[2] = prueba.datoCorreo;
-                list[3] = prueba.datoCategoria;
-                modelo.addRow(list);
+                list[count][0] = prueba.datoNombre;
+                list[count][1] = prueba.datoTelefono;
+                list[count][2] = prueba.datoCorreo;
+                list[count][3] = prueba.datoCategoria;
+                modelo.addRow(list[count]);
                 prueba = prueba.siguiente;
+                count++;
             }
-            
+
             prueba = listaAmigo.primero;
             while (prueba != null) {
-                list[0] = prueba.datoNombre;
-                list[1] = prueba.datoTelefono;
-                list[2] = prueba.datoCorreo;
-                list[3] = prueba.datoCategoria;
-                modelo.addRow(list);
+                list[count][0] = prueba.datoNombre;
+                list[count][1] = prueba.datoTelefono;
+                list[count][2] = prueba.datoCorreo;
+                list[count][3] = prueba.datoCategoria;
+                modelo.addRow(list[count]);
                 prueba = prueba.siguiente;
+                count++;
             }
-            
+
             prueba = listaTrabajo.primero;
             while (prueba != null) {
-                list[0] = prueba.datoNombre;
-                list[1] = prueba.datoTelefono;
-                list[2] = prueba.datoCorreo;
-                list[3] = prueba.datoCategoria;
-                modelo.addRow(list);
+                list[count][0] = prueba.datoNombre;
+                list[count][1] = prueba.datoTelefono;
+                list[count][2] = prueba.datoCorreo;
+                list[count][3] = prueba.datoCategoria;
+                modelo.addRow(list[count]);
                 prueba = prueba.siguiente;
+                count++;
             }
-        }        
+        }
         jTable1.setModel(modelo);
     }
-    
+
     public static void limpiarTabla(JTable tabla) {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         modelo.setRowCount(0);

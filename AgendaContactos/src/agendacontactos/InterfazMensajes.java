@@ -4,6 +4,9 @@
  */
 package agendacontactos;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author GMG
@@ -17,6 +20,8 @@ public class InterfazMensajes extends javax.swing.JFrame {
         initComponents();
     }
 
+    Cola colaDeMensajes = NuevoMensaje.getColaMensajes();
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -34,6 +39,7 @@ public class InterfazMensajes extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        btnMensajes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,7 +55,7 @@ public class InterfazMensajes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Contacto", "Mensaje", "Fecha"
+                "Contacto", "Telefono", "Mensaje", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -84,6 +90,14 @@ public class InterfazMensajes extends javax.swing.JFrame {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 90, -1));
 
+        btnMensajes.setText("Cargar Mensajes");
+        btnMensajes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMensajesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnMensajes, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 90, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,7 +113,8 @@ public class InterfazMensajes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        colaDeMensajes.quitar();
+        NuevoMensaje.setColaMensajes(colaDeMensajes);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -116,6 +131,38 @@ public class InterfazMensajes extends javax.swing.JFrame {
         instancia.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void btnMensajesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMensajesActionPerformed
+        getMensajes();
+    }//GEN-LAST:event_btnMensajesActionPerformed
+
+    private void getMensajes(){
+        Object[][] lista = new Object[100][3];
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        limpiarTabla(jTable1);
+        
+        int x=0;
+        while(!colaDeMensajes.colaVacia()){
+            lista[x] = colaDeMensajes.quitar();
+            modelo.addRow(lista[x]);
+            x++;
+        }
+        int y=0;
+        while(x != 0){
+            x--;
+            System.out.println(lista[x][1] +" " + lista[x][0]);
+            colaDeMensajes.insertar(lista[y][0], lista[y][1], lista[y][2], lista[y][3]);
+            y++;
+        }
+    }
+    
+    
+    public static void limpiarTabla(JTable tabla) {
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        modelo.setRowCount(0);
+        tabla.repaint();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -152,6 +199,7 @@ public class InterfazMensajes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMensajes;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

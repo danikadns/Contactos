@@ -31,8 +31,8 @@ public class Llamada extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JLabel();
+        txtNumero = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -72,11 +72,11 @@ public class Llamada extends javax.swing.JFrame {
         jLabel2.setText("LLAMANDO :");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
-        jLabel3.setText("jLabel3");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+        txtNombre.setText("jLabel3");
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
 
-        jLabel4.setText("jLabel4");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
+        txtNumero.setText("jLabel4");
+        jPanel1.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
 
         jButton1.setText("Cancelar ");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -146,10 +146,10 @@ public class Llamada extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JLabel txtNombre;
+    public javax.swing.JLabel txtNumero;
     // End of variables declaration//GEN-END:variables
 }

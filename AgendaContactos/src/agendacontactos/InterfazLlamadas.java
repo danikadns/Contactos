@@ -4,6 +4,9 @@
  */
 package agendacontactos;
 
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author GMG
@@ -16,6 +19,9 @@ public class InterfazLlamadas extends javax.swing.JFrame {
     public InterfazLlamadas() {
         initComponents();
     }
+    
+    Pila pilaDeLlamadas = InterfazMostrar.getPilaLlamada();
+    Pila pilaprueba = InterfazMostrar.getPilaLlamada();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +39,7 @@ public class InterfazLlamadas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +78,11 @@ public class InterfazLlamadas extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 310, -1, -1));
 
         jButton2.setText("Cerrar");
@@ -80,6 +92,14 @@ public class InterfazLlamadas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -102,6 +122,47 @@ public class InterfazLlamadas extends javax.swing.JFrame {
         instancia.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        getLlamadas();
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        pilaDeLlamadas.pop();
+        InterfazMostrar.setPilaLlamadas(pilaprueba);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void getLlamadas(){
+        pilaDeLlamadas = InterfazMostrar.getPilaLlamada();
+        Object[][] lista = new Object[100][3];
+        
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        limpiarTabla(jTable1);
+        
+        int x=0;
+        
+        
+        while(!pilaDeLlamadas.pilaVacia()){
+            lista[x] = pilaDeLlamadas.pop();
+            modelo.addRow(lista[x]);
+            x++;
+        }
+        
+        while(x != 0){
+            x--;
+            System.out.println(lista[x][1] +" " + lista[x][0]);
+            pilaDeLlamadas.push(lista[x][1], lista[x][0], lista[x][2]);            
+        }
+        pilaDeLlamadas.mostrarElementosPila();
+        
+        jTable1.setModel(modelo);
+    }   
+    
+    public static void limpiarTabla(JTable tabla) {
+        DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+        modelo.setRowCount(0);
+        tabla.repaint();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -138,6 +199,7 @@ public class InterfazLlamadas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
