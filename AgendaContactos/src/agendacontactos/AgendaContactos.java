@@ -14,8 +14,8 @@ public class AgendaContactos {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.setVisible(true);
+        Principal Home = new Principal();
+        Home.setVisible(true);
     }
     
 }
