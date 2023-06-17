@@ -196,66 +196,67 @@ public class InterfazAgregar extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (txt_nombre.getText().trim().isEmpty() || txt_numero.getText().trim().isEmpty() || txt_correo.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, Verificar que los campos esten correctamente");
-            } else if (txt_nombre.getText().trim().isEmpty() || txt_numero.getText().trim().isEmpty() || txt_correo.getText().trim().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
-            
-            } else if (!txt_numero.getText().matches("\\d+")) {
-                JOptionPane.showMessageDialog(null, "Ingrese solo números en el campo número");
-            } else if (!txt_correo.getText().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-                 JOptionPane.showMessageDialog(null, "Ingrese un correo electrónico válido");
-            } else {
-    // El código de validación adicional si es necesario
-                 JOptionPane.showMessageDialog(null, "Guardado con éxito");
-         
+        } else if (txt_nombre.getText().trim().isEmpty() || txt_numero.getText().trim().isEmpty() || txt_correo.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+
+        } else if (!txt_numero.getText().matches("\\d+")) {
+            JOptionPane.showMessageDialog(null, "Ingrese solo números en el campo número");
+        } else if (!txt_correo.getText().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            JOptionPane.showMessageDialog(null, "Ingrese un correo electrónico válido");
+        } else if (validarIgualdad(parseInt(txt_numero.getText()))) {
+            JOptionPane.showMessageDialog(null, "No puede agregarse porque ya existe un registro con este número");
+        } else {
+
+            // El código de validación adicional si es necesario
+            JOptionPane.showMessageDialog(null, "Guardado con éxito");
+
             String seleccion = (String) jComboBox1.getSelectedItem();
 
-        if (seleccion.equals("Familia")) {
+            if (seleccion.equals("Familia")) {
 
-            contacto[0] = txt_nombre.getText().toString();
-            contacto[1] = parseInt(txt_numero.getText());
-            contacto[2] = txt_correo.getText();
-            contacto[3] = jComboBox1.getSelectedItem();
-            contactosGeneral[f][0] = contacto[0];
-            contactosGeneral[f][1] = contacto[1];
-            contactosGeneral[f][2] = contacto[2];
-            contactosGeneral[f][3] = contacto[3];
-            listaFamilia.insertarEnCabezaLista(contacto);
-            listaFamilia.mostrarDatosLista();
-            f++;
-        } else if (seleccion.equals("Amigos")) {
-            contacto[0] = txt_nombre.getText().toString();
-            contacto[1] = parseInt(txt_numero.getText());
-            contacto[2] = txt_correo.getText();
-            contacto[3] = jComboBox1.getSelectedItem();
-            contactosGeneral[f][0] = contacto[0];
-            contactosGeneral[f][1] = contacto[1];
-            contactosGeneral[f][2] = contacto[2];
-            contactosGeneral[f][3] = contacto[3];
-            listaAmigos.insertarEnCabezaLista(contacto);
-            listaAmigos.mostrarDatosLista();
-            f++;
-        } else if (seleccion.equals("Trabajo")) {
-            contacto[0] = txt_nombre.getText().toString();
-            contacto[1] = parseInt(txt_numero.getText());
-            contacto[2] = txt_correo.getText();
-            contacto[3] = jComboBox1.getSelectedItem();
-            contactosGeneral[f][0] = contacto[0];
-            contactosGeneral[f][1] = contacto[1];
-            contactosGeneral[f][2] = contacto[2];
-            contactosGeneral[f][3] = contacto[3];
-            listaTrabajo.insertarEnCabezaLista(contacto);
-            listaTrabajo.mostrarDatosLista();
-            f++;
+                contacto[0] = txt_nombre.getText().toString();
+                contacto[1] = parseInt(txt_numero.getText());
+                contacto[2] = txt_correo.getText();
+                contacto[3] = jComboBox1.getSelectedItem();
+                contactosGeneral[f][0] = contacto[0];
+                contactosGeneral[f][1] = contacto[1];
+                contactosGeneral[f][2] = contacto[2];
+                contactosGeneral[f][3] = contacto[3];
+                listaFamilia.insertarEnCabezaLista(contacto);
+                listaFamilia.mostrarDatosLista();
+                f++;
+            } else if (seleccion.equals("Amigos")) {
+                contacto[0] = txt_nombre.getText().toString();
+                contacto[1] = parseInt(txt_numero.getText());
+                contacto[2] = txt_correo.getText();
+                contacto[3] = jComboBox1.getSelectedItem();
+                contactosGeneral[f][0] = contacto[0];
+                contactosGeneral[f][1] = contacto[1];
+                contactosGeneral[f][2] = contacto[2];
+                contactosGeneral[f][3] = contacto[3];
+                listaAmigos.insertarEnCabezaLista(contacto);
+                listaAmigos.mostrarDatosLista();
+                f++;
+            } else if (seleccion.equals("Trabajo")) {
+                contacto[0] = txt_nombre.getText().toString();
+                contacto[1] = parseInt(txt_numero.getText());
+                contacto[2] = txt_correo.getText();
+                contacto[3] = jComboBox1.getSelectedItem();
+                contactosGeneral[f][0] = contacto[0];
+                contactosGeneral[f][1] = contacto[1];
+                contactosGeneral[f][2] = contacto[2];
+                contactosGeneral[f][3] = contacto[3];
+                listaTrabajo.insertarEnCabezaLista(contacto);
+                listaTrabajo.mostrarDatosLista();
+                f++;
+            }
+
         }
-           
-           
-      }
-         
-       
+
         txt_nombre.setText("");
-            txt_numero.setText("");
-            txt_correo.setText("");
-            
+        txt_numero.setText("");
+        txt_correo.setText("");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
@@ -285,6 +286,31 @@ public class InterfazAgregar extends javax.swing.JFrame {
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_nombreActionPerformed
+
+    private boolean validarIgualdad(int telefono) {
+        if (!listaAmigos.listaVacia()) {
+            if (listaAmigos.busquedaDeNodoEnLista(telefono) != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (!listaTrabajo.listaVacia()) {
+            if (listaTrabajo.busquedaDeNodoEnLista(telefono) != null) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (!listaFamilia.listaVacia()) {
+            if (listaFamilia.busquedaDeNodoEnLista(telefono) != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+    }
 
     /**
      * @param args the command line arguments
