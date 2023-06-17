@@ -291,7 +291,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         InterfazLlamadas instancia = new InterfazLlamadas();
-        dispose();
+        dispose() ;
         instancia.setVisible(true);
         
     }//GEN-LAST:event_jButton2ActionPerformed
