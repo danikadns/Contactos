@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -5,8 +6,15 @@
 package agendacontactos;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.SwingUtilities;
+
 
 /**
  *
@@ -17,6 +25,17 @@ public class Arbol extends JPanel {
     private NodoArbol raiz;
 
     public Arbol() {
+         // Crea el botón de cierre
+        JButton botonCerrar = new JButton("Cerrar");
+        botonCerrar.setBounds(10, 2, 80, 30); // Define la posición y tamaño del botón
+        botonCerrar.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        Principal principal = new Principal();
+        SwingUtilities.getWindowAncestor(Arbol.this).dispose(); // Si estás dentro de un JFrame
+        principal.setVisible(true); //Si menuFrame es el JFrame del menú
+    }
+});
+        this.add(botonCerrar);
         this.raiz = null;
     }
 
@@ -321,45 +340,57 @@ public class Arbol extends JPanel {
         }
     }
 
-    // Metodos para convertir esta clase en una representacion grafica
-    private void representarArbolGraficamente(NodoArbol nodo, int x, int y, int nivel, Graphics grafica) {
-        int radio = 25;
-        int diametro = radio * 2;
-        
-        if(nodo.getCategoria().equals("Familia")){
-            grafica.setColor(Color.BLUE);
-        }else if(nodo.getCategoria().equals("Amigos")){
-            grafica.setColor(Color.GREEN);
-        }else if(nodo.getCategoria().equals("Trabajo")){
-            grafica.setColor(Color.red);
-        }
-        
-        
-        
-        grafica.fillOval(x - radio, y - radio, diametro, diametro);
-        grafica.setColor(Color.black);
-        grafica.drawOval(x - radio, y - radio, diametro, diametro);
-        grafica.drawString(String.valueOf(nodo.getRaiz()), x - 25, y + 5);
-        grafica.drawString(String.valueOf(nodo.getNombre()), x - 5, y + 15);
+// Metodos para convertir esta clase en una representacion grafica
+private void representarArbolGraficamente(NodoArbol nodo, int x, int y, int nivel, Graphics grafica) {
+    int radio = 10;
+    int diametro = radio * 10;
+    
+    Color inicioColor = getColorCategoria(nodo.getCategoria());
+    Color finColor = Color.WHITE; // Color final para el degradado
+    
+    GradientPaint gradientPaint = new GradientPaint(x - radio, y - radio, inicioColor, x + radio, y + radio, finColor);
+    Graphics2D g2d = (Graphics2D) grafica;
+    g2d.setPaint(gradientPaint);
+    
+    int ancho = diametro; // Ancho del óvalo
+    int alto = diametro * 2 / 4; // Alto del óvalo (3/4 del diámetro)
+    
+    g2d.fillOval(x - ancho / 2, y - alto / 2, ancho, alto);
+    g2d.setColor(Color.BLACK);
+    g2d.drawOval(x - ancho / 2, y - alto / 2, ancho, alto);
+    g2d.drawString(String.valueOf(nodo.getNombre()), x -25, y + 15);
+    g2d.drawString(String.valueOf(nodo.getRaiz()), x - 25, y + 0);
 
-        int espacioX = 100;
-        int espacioY = 80;
+    int espacioX = 100;
+    int espacioY = 80;
 
-        if (nodo.getHijoIzquierdo() != null) {
-            grafica.drawLine(x, y, x - espacioX, y + espacioY);
-            representarArbolGraficamente(nodo.getHijoIzquierdo(), x - espacioX, y + espacioY, nivel + 1, grafica);
-        }
-        if (nodo.getHijoDerecho() != null) {
-            grafica.drawLine(x, y, x + espacioX, y + espacioY);
-            representarArbolGraficamente(nodo.getHijoDerecho(), x + espacioX, y + espacioY, nivel + 1, grafica);
-        }
+    if (nodo.getHijoIzquierdo() != null) {
+        g2d.drawLine(x, y, x - espacioX, y + espacioY);
+        representarArbolGraficamente(nodo.getHijoIzquierdo(), x - espacioX, y + espacioY, nivel + 1, grafica);
     }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        repaint();
-        this.representarArbolGraficamente(raiz, getWidth() / 2, 50, 0, g);
+    if (nodo.getHijoDerecho() != null) {
+        g2d.drawLine(x, y, x + espacioX, y + espacioY);
+        representarArbolGraficamente(nodo.getHijoDerecho(), x + espacioX, y + espacioY, nivel + 1, grafica);
     }
+}
+
+private Color getColorCategoria(String categoria) {
+    if (categoria.equals("Familia")) {
+        return new Color(0, 0, 255); // Azul
+    } else if (categoria.equals("Amigos")) {
+        return new Color(0, 255, 0); // Verde
+    } else if (categoria.equals("Trabajo")) {
+        return new Color(255, 0, 0); // Rojo
+    }
+    return Color.GRAY;
+}
+
+@Override
+protected void paintComponent(Graphics g) {
+    super.paintComponent(g);
+    repaint();
+    this.representarArbolGraficamente(raiz, getWidth() / 2, 50, 0, g);
+}
+
 
 }

@@ -5,6 +5,8 @@
 package agendacontactos;
 
 import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -20,6 +22,9 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
      
     }
+    
+    JFrame frame = null;
+    boolean arbolAbierto = false;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -319,8 +324,51 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        
+        Arbol arbolBinario = new Arbol();
+        ListaEnlazadaSimple listaAmigo = InterfazAgregar.getListaAmigos();
+        ListaEnlazadaSimple listaTrabajo = InterfazAgregar.getListaTrabajo();
+        ListaEnlazadaSimple listaFamilia = InterfazAgregar.getListaFamilia();        
+
+        NodoLista prueba;
+        listaAmigo.mostrarDatosLista();
+        listaTrabajo.mostrarDatosLista();
+        listaFamilia.mostrarDatosLista();
+        int telefono;
+        prueba = listaAmigo.primero;
+        while (prueba != null) {
+            telefono = (int) prueba.datoTelefono;
+            arbolBinario.insertarNodo(telefono, arbolBinario.getRaiz(), prueba.datoNombre.toString(), prueba.datoCategoria.toString());
+            prueba = prueba.siguiente;
+        }
+        prueba = listaTrabajo.primero;
+        while (prueba != null) {
+            telefono = (int) prueba.datoTelefono;
+            arbolBinario.insertarNodo(telefono, arbolBinario.getRaiz(), prueba.datoNombre.toString(), prueba.datoCategoria.toString());
+            prueba = prueba.siguiente;
+        }
+        prueba = listaFamilia.primero;
+        while (prueba != null) {
+            telefono = (int) prueba.datoTelefono;
+            arbolBinario.insertarNodo(telefono, arbolBinario.getRaiz(), prueba.datoNombre.toString(), prueba.datoCategoria.toString());
+            prueba = prueba.siguiente;
+        }
+        if (!arbolBinario.arbolVacio()) {
+            if (arbolAbierto == false) {
+                arbolAbierto = true;
+                frame = new JFrame("ARBOL GRAFICO");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(800, 600);
+                frame.add(arbolBinario);
+                frame.setVisible(true);
+                dispose();
+            } else {
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "EL ARBOL ESTA VACIO", "AGREGUE UN NODO", JOptionPane.WARNING_MESSAGE);
+        }
+     
     }//GEN-LAST:event_jButton4ActionPerformed
 
     /**

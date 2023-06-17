@@ -27,6 +27,9 @@ public class AgendaContactos {
         Home.setLocationRelativeTo(null);
        
         Home.setVisible(true);
+        
+        
+        
     }
     
 }

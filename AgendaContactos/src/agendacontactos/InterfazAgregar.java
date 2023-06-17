@@ -66,7 +66,7 @@ public class InterfazAgregar extends javax.swing.JFrame {
         jPanel1.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txt_nombre.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        txt_nombre.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         txt_nombre.setForeground(new java.awt.Color(0, 0, 0));
         txt_nombre.setBorder(null);
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +81,7 @@ public class InterfazAgregar extends javax.swing.JFrame {
         jLabel1.setText("Nombre:");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, -1, -1));
 
-        txt_numero.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 18)); // NOI18N
+        txt_numero.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 14)); // NOI18N
         txt_numero.setForeground(new java.awt.Color(0, 0, 0));
         txt_numero.setBorder(null);
         txt_numero.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -193,12 +193,20 @@ public class InterfazAgregar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (txt_nombre.getText().isEmpty() || txt_numero.getText().isEmpty() || txt_correo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
-        } else {
-            // El código de validación adicional si es necesario
-        }
-        String seleccion = (String) jComboBox1.getSelectedItem();
+        if (txt_nombre.getText().trim().isEmpty() || txt_numero.getText().trim().isEmpty() || txt_correo.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Por favor, Verificar que los campos esten correctamente");
+            } else if (txt_nombre.getText().trim().isEmpty() || txt_numero.getText().trim().isEmpty() || txt_correo.getText().trim().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
+            
+            } else if (!txt_numero.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(null, "Ingrese solo números en el campo número");
+            } else if (!txt_correo.getText().matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+                 JOptionPane.showMessageDialog(null, "Ingrese un correo electrónico válido");
+            } else {
+    // El código de validación adicional si es necesario
+                 JOptionPane.showMessageDialog(null, "Guardado con éxito");
+         
+            String seleccion = (String) jComboBox1.getSelectedItem();
 
         if (seleccion.equals("Familia")) {
 
@@ -238,8 +246,15 @@ public class InterfazAgregar extends javax.swing.JFrame {
             listaTrabajo.mostrarDatosLista();
             f++;
         }
-
-
+           
+           
+      }
+         
+       
+        txt_nombre.setText("");
+            txt_numero.setText("");
+            txt_correo.setText("");
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed

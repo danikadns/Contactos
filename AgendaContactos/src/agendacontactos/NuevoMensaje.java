@@ -244,6 +244,11 @@ public class NuevoMensaje extends javax.swing.JFrame {
         colaMensaje.frenteCola();
         
         System.out.println(list[0]);
+        if (txtMensaje.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese texto para enviar");
+        }else{
+       txtMensaje.setText(" ");
+       JOptionPane.showMessageDialog(null, "Enviado con exito");}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static Cola getColaMensajes(){
