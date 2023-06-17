@@ -49,7 +49,7 @@ public class ListaEnlazadaSimple {
     
     // Metodo para buscar un nodo en la lista
     public NodoLista busquedaDeNodoEnLista(Object datoBuscado){
-        NodoLista nodoActual = primero;
+        NodoLista nodoActual = this.primero;
         while (!nodoActual.datoTelefono.equals(datoBuscado)){
             if(nodoActual.siguiente == null){
                 return null;

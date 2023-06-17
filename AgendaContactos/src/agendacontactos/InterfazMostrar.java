@@ -4,7 +4,7 @@
  */
 package agendacontactos;
 
-
+import static java.lang.Integer.parseInt;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -19,12 +19,18 @@ public class InterfazMostrar extends javax.swing.JFrame {
     /**
      * Creates new form InterfazMostrar
      */
+    ListaEnlazadaSimple listaAmigo;
+    ListaEnlazadaSimple listaTrabajo;
+    ListaEnlazadaSimple listaFamilia;
+
     public InterfazMostrar() {
         initComponents();
+        listaAmigo = InterfazAgregar.getListaAmigos();
+        listaTrabajo = InterfazAgregar.getListaTrabajo();
+        listaFamilia = InterfazAgregar.getListaFamilia();
     }
     Object[][] list = new Object[100][4];
-    
-    
+
     static Pila pilaLlamadas = new Pila(100);
 
     /**
@@ -50,7 +56,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -145,7 +151,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
 
         jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 100));
 
-        jButton4.setText("Editar");
+        jButton4.setText("Eliminar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
@@ -153,14 +159,19 @@ public class InterfazMostrar extends javax.swing.JFrame {
         });
         jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, 80, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtBuscarActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 350, -1));
+        jPanel4.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 350, -1));
 
         jButton5.setText("Buscar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/4115235-exit-logout-sign-out_114030.png"))); // NOI18N
@@ -230,12 +241,56 @@ public class InterfazMostrar extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        int index = jTable1.getSelectedRow();
+
+        if (index != -1) {
+            NodoLista datobuscado = listaAmigo.primero;
+            while (datobuscado != null) {
+                if (datobuscado.datoTelefono.equals(list[index][1])) {
+                    listaAmigo.eliminarNodoEnLista(list[index][1]);
+                    InterfazAgregar.setListaAmigos(listaAmigo);
+                    JOptionPane.showMessageDialog(null, "Contacto eliminado");
+                    break;
+                }
+                datobuscado = datobuscado.siguiente;
+            }
+            if (datobuscado == null) {
+                datobuscado = listaTrabajo.primero;
+                while (datobuscado != null) {
+                    if (datobuscado.datoTelefono.equals(list[index][1])) {
+                        listaTrabajo.eliminarNodoEnLista(list[index][1]);
+                        InterfazAgregar.setListaTrabajo(listaTrabajo);
+                        JOptionPane.showMessageDialog(null, "Contacto eliminado");
+                        break;
+                    }
+                    datobuscado = datobuscado.siguiente;
+                }
+
+                if (datobuscado == null) {
+                    datobuscado = listaFamilia.primero;
+                    while (datobuscado != null) {
+                        if (datobuscado.datoTelefono.equals(list[index][1])) {
+                            listaFamilia.eliminarNodoEnLista(list[index][1]);
+                            InterfazAgregar.setListaFamilia(listaFamilia);
+                            JOptionPane.showMessageDialog(null, "Contacto eliminado");
+                            break;
+                        }
+                        datobuscado = datobuscado.siguiente;
+                    }
+                    if (datobuscado == null) {
+                        JOptionPane.showMessageDialog(null, "No se encontro el contacto");
+                    }
+                }
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione un contacto");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int index = jTable1.getSelectedRow();
@@ -244,28 +299,105 @@ public class InterfazMostrar extends javax.swing.JFrame {
             LocalDateTime fechaActual = LocalDateTime.now();
             pilaLlamadas.push(list[index][1], list[index][0], fechaActual);
             pilaLlamadas.mostrarElementosPila();
-            
+
             Llamada instancia = new Llamada();
 
             instancia.setVisible(true);
             instancia.txtNombre.setText(list[index][0].toString());
             instancia.txtNumero.setText(list[index][1].toString());
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Por favor, seleccione un contacto");
         }
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    public static Pila getPilaLlamada(){
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        getUsuario();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public static Pila getPilaLlamada() {
         return pilaLlamadas;
+    }
+
+    private void getUsuario() {
+        int numero = 0;
+        NodoLista datobuscado = listaAmigo.primero;
+
+        try {
+            numero = parseInt(txtBuscar.getText());
+            while (datobuscado != null) {
+                if (datobuscado.datoTelefono.equals(numero)) {
+                    break;
+                }
+                datobuscado = datobuscado.siguiente;
+            }
+
+            if (datobuscado == null) {
+                datobuscado = listaTrabajo.primero;
+                while (datobuscado != null) {
+                    if (datobuscado.datoTelefono.equals(numero)) {
+                        break;
+                    }
+                    datobuscado = datobuscado.siguiente;
+                }
+
+                if (datobuscado == null) {
+                    datobuscado = listaFamilia.primero;
+                    while (datobuscado != null) {
+                        if (datobuscado.datoTelefono.equals(numero)) {
+                            break;
+                        }
+                        datobuscado = datobuscado.siguiente;
+                    }
+                    if (datobuscado == null) {
+                        JOptionPane.showMessageDialog(null, "No se encontro el contacto");
+                    }
+                }
+            }
+
+        } catch (NumberFormatException ex) {
+            System.out.println("es txto");
+            String buscar = txtBuscar.getText();
+
+            while (datobuscado != null) {
+                if (datobuscado.datoNombre.equals(buscar)) {
+                    break;
+                }
+                datobuscado = datobuscado.siguiente;
+            }
+
+            if (datobuscado == null) {
+                datobuscado = listaTrabajo.primero;
+                while (datobuscado != null) {
+                    if (datobuscado.datoNombre.equals(buscar)) {
+                        break;
+                    }
+                    datobuscado = datobuscado.siguiente;
+                }
+                if (datobuscado == null) {
+                    datobuscado = listaFamilia.primero;
+                    while (datobuscado != null) {
+                        if (datobuscado.datoNombre.equals(buscar)) {
+                            break;
+                        }
+                        datobuscado = datobuscado.siguiente;
+                    }
+                    if (datobuscado == null) {
+                        JOptionPane.showMessageDialog(null, "No se encontro el contacto");
+                    }
+                }
+            }
+
+        }
+
+        JOptionPane.showMessageDialog(null, "El contacto completo es Nombre: " + datobuscado.datoNombre + ", Telefono: " + datobuscado.datoTelefono + ", Correo: " + datobuscado.datoCorreo);
     }
 
     public static void setPilaLlamadas(Pila pilaLlamadas) {
         InterfazMostrar.pilaLlamadas = pilaLlamadas;
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -416,6 +548,6 @@ public class InterfazMostrar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

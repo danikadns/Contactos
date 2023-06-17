@@ -16,13 +16,13 @@ public class InterfazAgregar extends javax.swing.JFrame {
     /**
      * Creates new form Interfaz
      */
-    int f = 0;    
+    int f = 0;
     public static ListaEnlazadaSimple listaFamilia = new ListaEnlazadaSimple();
     public static ListaEnlazadaSimple listaTrabajo = new ListaEnlazadaSimple();
     public static ListaEnlazadaSimple listaAmigos = new ListaEnlazadaSimple();
     public static Object[] contacto = new Object[4];
     public static Object[][] contactosGeneral = new Object[100][100];
-    
+
     public InterfazAgregar() {
         initComponents();
         TextPrompt nombre = new TextPrompt("Ingrese su nombre", txt_nombre);
@@ -193,15 +193,15 @@ public class InterfazAgregar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-          if (txt_nombre.getText().isEmpty() || txt_numero.getText().isEmpty() ||txt_correo.getText().isEmpty()  ) {
+        if (txt_nombre.getText().isEmpty() || txt_numero.getText().isEmpty() || txt_correo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Por favor, complete todos los campos");
         } else {
             // El código de validación adicional si es necesario
         }
         String seleccion = (String) jComboBox1.getSelectedItem();
-        
-        if(seleccion.equals("Familia")){
-            
+
+        if (seleccion.equals("Familia")) {
+
             contacto[0] = txt_nombre.getText().toString();
             contacto[1] = parseInt(txt_numero.getText());
             contacto[2] = txt_correo.getText();
@@ -212,8 +212,8 @@ public class InterfazAgregar extends javax.swing.JFrame {
             contactosGeneral[f][3] = contacto[3];
             listaFamilia.insertarEnCabezaLista(contacto);
             listaFamilia.mostrarDatosLista();
-            f++;            
-        }else if(seleccion.equals("Amigos")){           
+            f++;
+        } else if (seleccion.equals("Amigos")) {
             contacto[0] = txt_nombre.getText().toString();
             contacto[1] = parseInt(txt_numero.getText());
             contacto[2] = txt_correo.getText();
@@ -225,7 +225,7 @@ public class InterfazAgregar extends javax.swing.JFrame {
             listaAmigos.insertarEnCabezaLista(contacto);
             listaAmigos.mostrarDatosLista();
             f++;
-        }else if(seleccion.equals("Trabajo")){
+        } else if (seleccion.equals("Trabajo")) {
             contacto[0] = txt_nombre.getText().toString();
             contacto[1] = parseInt(txt_numero.getText());
             contacto[2] = txt_correo.getText();
@@ -238,34 +238,32 @@ public class InterfazAgregar extends javax.swing.JFrame {
             listaTrabajo.mostrarDatosLista();
             f++;
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         InterfazMostrar instancia = new InterfazMostrar();
         dispose();
         instancia.setVisible(true);
-        
-        
+
+
     }//GEN-LAST:event_cerrarActionPerformed
 
     private void txt_numeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numeroKeyPressed
         // TODO add your handling code here:
         char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
-            JOptionPane.showMessageDialog(rootPane,"Debe Ingresar solo numeros");
+            JOptionPane.showMessageDialog(rootPane, "Debe Ingresar solo numeros");
         }
-        
+
     }//GEN-LAST:event_txt_numeroKeyPressed
 
     private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
         // TODO add your handling code here:
-      
+
     }//GEN-LAST:event_jButton1MousePressed
 
     private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
@@ -309,21 +307,33 @@ public class InterfazAgregar extends javax.swing.JFrame {
             }
         });
     }
-    
-    public static ListaEnlazadaSimple getListaAmigos(){
+
+    public static ListaEnlazadaSimple getListaAmigos() {
         return listaAmigos;
     }
-    
-    public static ListaEnlazadaSimple getListaTrabajo(){
+
+    public static ListaEnlazadaSimple getListaTrabajo() {
         return listaTrabajo;
     }
-    
-    public static ListaEnlazadaSimple getListaFamilia(){
+
+    public static ListaEnlazadaSimple getListaFamilia() {
         return listaFamilia;
     }
-    
-    public static Object[][] getContactoI(){
+
+    public static Object[][] getContactoI() {
         return contactosGeneral;
+    }
+
+    public static void setListaFamilia(ListaEnlazadaSimple listaFamilia) {
+        InterfazAgregar.listaFamilia = listaFamilia;
+    }
+
+    public static void setListaTrabajo(ListaEnlazadaSimple listaTrabajo) {
+        InterfazAgregar.listaTrabajo = listaTrabajo;
+    }
+
+    public static void setListaAmigos(ListaEnlazadaSimple listaAmigos) {
+        InterfazAgregar.listaAmigos = listaAmigos;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
