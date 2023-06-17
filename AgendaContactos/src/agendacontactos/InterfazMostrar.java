@@ -47,14 +47,19 @@ public class InterfazMostrar extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -74,7 +79,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 490, 220));
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 490, 220));
 
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -82,10 +87,10 @@ public class InterfazMostrar extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 140, 91, -1));
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 150, 91, -1));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Familia", "Trabajo", "Amigos" }));
-        jPanel4.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, -1, -1));
+        jPanel4.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 220, -1, -1));
 
         cerrar.setText("cerrar");
         cerrar.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +98,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
                 cerrarActionPerformed(evt);
             }
         });
-        jPanel4.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 410, 80, 30));
+        jPanel4.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 490, 80, 30));
 
         jButton2.setText("Agregar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +106,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, 80, 30));
+        jPanel4.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 490, 80, 30));
 
         jButton3.setText("Llamar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -109,30 +114,36 @@ public class InterfazMostrar extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 280, 90, 30));
+        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 490, 90, 30));
 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Categoria ");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, 67, -1));
+        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 180, 67, -1));
 
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jPanel2.setBackground(new java.awt.Color(32, 47, 90));
+
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Light", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CONTACTOS GUARDADOS");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 180, 20));
-
-        jPanel2.setBackground(new java.awt.Color(51, 51, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 130, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 530));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 100));
 
         jButton4.setText("Editar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -140,17 +151,35 @@ public class InterfazMostrar extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 410, 80, -1));
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 490, 80, -1));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 350, -1));
+        jPanel4.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 350, -1));
 
         jButton5.setText("Buscar");
-        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, -1, -1));
+        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, -1, -1));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/4115235-exit-logout-sign-out_114030.png"))); // NOI18N
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/llamarContac.png"))); // NOI18N
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, -1, -1));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/refresh-arrow_icon-icons.com_73442_1.png"))); // NOI18N
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 120, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/buscarContac.png"))); // NOI18N
+        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 110, -1, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/agregarContac.png"))); // NOI18N
+        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/editarContac.png"))); // NOI18N
+        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 430, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,20 +192,20 @@ public class InterfazMostrar extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 512, Short.MAX_VALUE))
         );
 
         pack();
@@ -375,6 +404,12 @@ public class InterfazMostrar extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
