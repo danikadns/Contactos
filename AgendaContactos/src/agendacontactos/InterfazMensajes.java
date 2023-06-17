@@ -4,6 +4,7 @@
  */
 package agendacontactos;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,14 +18,13 @@ public class InterfazMensajes extends javax.swing.JFrame {
      * Creates new form InterfazMensajes
      */
     Cola colaDeMensajes;
+
     public InterfazMensajes() {
         colaDeMensajes = NuevoMensaje.getColaMensajes();
         initComponents();
         getMensajes();
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -145,16 +145,25 @@ public class InterfazMensajes extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        colaDeMensajes.quitar();
-        NuevoMensaje.setColaMensajes(colaDeMensajes);
+        if (!colaDeMensajes.colaVacia()) {
+            colaDeMensajes.quitar();
+            NuevoMensaje.setColaMensajes(colaDeMensajes);
+            JOptionPane.showMessageDialog(null, "Mensaje Eliminado");
+            getMensajes();
+        } else {
+            JOptionPane.showMessageDialog(null, "La bandeja de mensajes esta vacia");
+
+        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-   NuevoMensaje instancia = new NuevoMensaje();
+        NuevoMensaje instancia = new NuevoMensaje();
         dispose();
         instancia.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -170,34 +179,33 @@ public class InterfazMensajes extends javax.swing.JFrame {
         getMensajes();
     }//GEN-LAST:event_btnMensajesActionPerformed
 
-    private void getMensajes(){
+    private void getMensajes() {
         Object[][] lista = new Object[100][3];
-        
+
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         limpiarTabla(jTable1);
-        
-        int x=0;
-        while(!colaDeMensajes.colaVacia()){
+
+        int x = 0;
+        while (!colaDeMensajes.colaVacia()) {
             lista[x] = colaDeMensajes.quitar();
             modelo.addRow(lista[x]);
             x++;
         }
-        int y=0;
-        while(x != 0){
+        int y = 0;
+        while (x != 0) {
             x--;
-            System.out.println(lista[x][1] +" " + lista[x][0]);
+            System.out.println(lista[x][1] + " " + lista[x][0]);
             colaDeMensajes.insertar(lista[y][0], lista[y][1], lista[y][2], lista[y][3]);
             y++;
         }
     }
-    
-    
+
     public static void limpiarTabla(JTable tabla) {
         DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
         modelo.setRowCount(0);
         tabla.repaint();
     }
-    
+
     /**
      * @param args the command line arguments
      */

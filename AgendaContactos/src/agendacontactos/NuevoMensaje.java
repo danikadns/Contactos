@@ -164,6 +164,7 @@ public class NuevoMensaje extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -227,13 +228,12 @@ public class NuevoMensaje extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String seleccion = (String) jComboBox1.getSelectedItem();
         
-        
-        if (txtMensaje.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese algun mensaje");
-        } else {
-            // El código de validación adicional si es necesario
-        }
-        LocalDateTime fechaActual = LocalDateTime.now();
+         if (txtMensaje.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese texto para enviar");
+            
+        }else{
+       JOptionPane.showMessageDialog(null, "Enviado con exito");
+         LocalDateTime fechaActual = LocalDateTime.now();
         list[0] = seleccion;        
         list[1] = txtNumero.getText();
         list[2] = txtMensaje.getText();
@@ -241,12 +241,12 @@ public class NuevoMensaje extends javax.swing.JFrame {
         colaMensaje.insertar(list[0], list[1], list[2], list[3]);
         colaMensaje.frenteCola();
         
-        System.out.println(list[0]);
-        if (txtMensaje.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "Por favor, ingrese texto para enviar");
-        }else{
-       txtMensaje.setText(" ");
-       JOptionPane.showMessageDialog(null, "Enviado con exito");}
+        System.out.println(list[0]); 
+         
+         }
+      txtMensaje.setText(" ");
+       
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public static Cola getColaMensajes(){
