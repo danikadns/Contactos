@@ -16,12 +16,19 @@ public class InterfazLlamadas extends javax.swing.JFrame {
     /**
      * Creates new form InterfazLlamadas
      */
+    Pila pilaDeLlamadas;
+    Pila pilaprueba;
+    
     public InterfazLlamadas() {
+        pilaDeLlamadas = InterfazMostrar.getPilaLlamada();
+        pilaprueba = InterfazMostrar.getPilaLlamada();
         initComponents();
+        getLlamadas();
+        
     }
     
-    Pila pilaDeLlamadas = InterfazMostrar.getPilaLlamada();
-    Pila pilaprueba = InterfazMostrar.getPilaLlamada();
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

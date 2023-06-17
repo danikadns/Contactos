@@ -141,8 +141,6 @@ public class NuevoMensaje extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Numero:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
-
-        txtNumero.setEnabled(false);
         jPanel1.add(txtNumero, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/cargarContac.png"))); // NOI18N
