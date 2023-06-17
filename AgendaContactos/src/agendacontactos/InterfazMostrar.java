@@ -28,6 +28,7 @@ public class InterfazMostrar extends javax.swing.JFrame {
         listaAmigo = InterfazAgregar.getListaAmigos();
         listaTrabajo = InterfazAgregar.getListaTrabajo();
         listaFamilia = InterfazAgregar.getListaFamilia();
+        GetUsers();
     }
     Object[][] list = new Object[100][4];
 

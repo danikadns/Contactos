@@ -16,11 +16,14 @@ public class InterfazMensajes extends javax.swing.JFrame {
     /**
      * Creates new form InterfazMensajes
      */
+    Cola colaDeMensajes;
     public InterfazMensajes() {
+        colaDeMensajes = NuevoMensaje.getColaMensajes();
         initComponents();
+        getMensajes();
     }
 
-    Cola colaDeMensajes = NuevoMensaje.getColaMensajes();
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
